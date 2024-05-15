@@ -29,6 +29,8 @@ def create_embeddings_for_pdf(pdf_id: str, pdf_path: str):
 
     # Get docs
     docs = loader.load_and_split(text_splitter)
-    print(docs)
-
+    
+    # Add docs to vector database
+    # Takes a long time -> embed -> openai -> back to user for redirect.
+    # calc. 35 individual embeddings
     vector_store.add_documents(docs)
