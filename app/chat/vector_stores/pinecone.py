@@ -32,3 +32,9 @@ if index_name not in pc.list_indexes().names():
 # Langchain wrapper for pinecone
 vector_store = PineconeVectorStore(index_name=index_name, 
                                   embedding=embeddings)
+
+def build_retriever(chat_args):
+    search_kwargs = {"filter": {"pdf_id": chat_args.pdf_id}}
+    return vector_store.as_retriever(
+            search_kwargs=search_kwargs
+            )

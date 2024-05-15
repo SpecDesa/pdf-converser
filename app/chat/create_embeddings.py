@@ -29,7 +29,13 @@ def create_embeddings_for_pdf(pdf_id: str, pdf_path: str):
 
     # Get docs
     docs = loader.load_and_split(text_splitter)
-    
+   
+    for doc in docs:
+        doc.metadata = {
+                "page": doc.metadata["page"],
+                "text": doc.page_content,
+                "pdf_id": pdf_id
+                }
     # Add docs to vector database
     # Takes a long time -> embed -> openai -> back to user for redirect.
     # calc. 35 individual embeddings
